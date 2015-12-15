@@ -30,7 +30,7 @@ public class Day4 {
 
         final String secret = "iwrupvqb";
 
-        // starting test
+        // starting Day3test
         int num = 1;
 
         while(true) {
