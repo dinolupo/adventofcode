@@ -57,8 +57,7 @@ public class Day5 {
         String workingDir = System.getProperty("user.dir");
         Path filePath = FileSystems.getDefault().getPath(workingDir + "/resources/Day5");
 
-        long nice = Files.lines(filePath)
-                //.map(line -> line.replaceAll("[^aeiou]",""))
+        long nice = Files.lines(filePath).parallel()
                 .filter(line -> {
 
                     // check - It does not contain the strings ab, cd, pq, or xy
@@ -75,7 +74,22 @@ public class Day5 {
                     return true;
                 })
                 .count();
-        System.out.printf("Part 1 - Nice Strings: %d", nice);
+        System.out.printf("Part 1 - Nice Strings: %d\n", nice);
+
+        long nice2 = Files.lines(filePath).parallel()
+                .filter(line -> {
+
+                    // check - It contains a pair of any two letters that appears at least twice in the string
+                    if (!line.matches(".*(\\w\\w).*\\1.*")) return false;
+
+                    // check - It contains at least one letter which repeats with exactly one letter between them
+                    if (!line.matches(".*(\\w).\\1.*")) return false;
+
+                    return true;
+                })
+                .count();
+
+        System.out.printf("Part 2 - Nice Strings: %d\n", nice2);
 
     }
 }

@@ -46,7 +46,7 @@ public class Day2 {
         String workingDir = System.getProperty("user.dir");
         Path filePath = FileSystems.getDefault().getPath(workingDir + "/resources/Day2");
 
-        List<int[]> converted = Files.lines(filePath)
+        List<int[]> converted = Files.lines(filePath).parallel()
                 .map( line -> line.split("x") )
                 .map( (String[] arr) -> Arrays.stream(arr).mapToInt(Integer::parseInt))
                 .map( intStream -> intStream.toArray())
